@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dhh624wnyiiif"]
+
+[ext_resource type="Script" uid="uid://b031q02ukynpn" path="res://Scripts/character_body_3d.gd" id="1_hr86y"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_glf1u"]
+radius = 0.546875
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33eq7"]
+albedo_color = Color(0.592139, 0, 0.03035077, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_glf1u"]
+material = SubResource("StandardMaterial3D_33eq7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hr86y"]
+albedo_color = Color(0.55333596, 0, 0.12572241, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_glf1u"]
+material = SubResource("StandardMaterial3D_hr86y")
+size = Vector3(0.2529297, 0.85546875, 0.46655273)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_daxpn"]
+albedo_color = Color(0.36863428, 0.5563437, 0.6390152, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_glf1u"]
+material = SubResource("StandardMaterial3D_daxpn")
+
+[node name="Player" type="CharacterBody3D" unique_id=1833712706 node_paths=PackedStringArray("camera")]
+script = ExtResource("1_hr86y")
+camera = NodePath("CamOrigin/CameraDistance/Camera3D")
+max_jump_distance = 20.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=573196159]
+shape = SubResource("CapsuleShape3D_glf1u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=847254332]
+mesh = SubResource("CapsuleMesh_glf1u")
+
+[node name="BackSide" type="MeshInstance3D" parent="." unique_id=1394582268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1603924, 0.4853958)
+mesh = SubResource("BoxMesh_glf1u")
+
+[node name="StartUpTimer" type="Timer" parent="." unique_id=2013519004]
+wait_time = 0.2
+one_shot = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1700993716]
+transform = Transform3D(0.6330626, 0, 0, 0, 0.42301592, 0, 0, 0, 0.3472244, -0.0014320612, 0.66029537, -0.36005494)
+mesh = SubResource("SphereMesh_glf1u")
+
+[node name="CamOrigin" type="Node3D" parent="." unique_id=771523477]
+
+[node name="CameraDistance" type="SpringArm3D" parent="CamOrigin" unique_id=169814014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9498377, 0)
+spring_length = 2.5
+margin = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="CamOrigin/CameraDistance" unique_id=804738862]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.061, 3.5)

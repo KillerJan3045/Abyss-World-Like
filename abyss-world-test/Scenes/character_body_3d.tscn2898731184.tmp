@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dhh624wnyiiif"]
+
+[ext_resource type="Script" uid="uid://b031q02ukynpn" path="res://Scripts/character_body_3d.gd" id="1_hr86y"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_glf1u"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_glf1u"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_glf1u"]
+size = Vector3(0.2529297, 0.23730469, 0.46655273)
+
+[node name="Player" type="CharacterBody3D" unique_id=1833712706 node_paths=PackedStringArray("camera")]
+script = ExtResource("1_hr86y")
+camera = NodePath("Camera3D")
+forward_speed = 20.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=573196159]
+shape = SubResource("CapsuleShape3D_glf1u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=847254332]
+mesh = SubResource("CapsuleMesh_glf1u")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=804738862]
+transform = Transform3D(1, 0, 0, 0, 0.97014076, 0.24254277, 0, -0.24254277, 0.97014076, 0, 1.2391618, 2.2321787)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1394582268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46947443, 0.4853958)
+mesh = SubResource("BoxMesh_glf1u")
+
+[node name="StartUpTimer" type="Timer" parent="." unique_id=2013519004]
+wait_time = 0.2
+one_shot = true
