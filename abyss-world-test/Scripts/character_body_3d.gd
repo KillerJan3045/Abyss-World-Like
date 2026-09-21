@@ -40,10 +40,7 @@ extends CharacterBody3D
 	$WallRayCasts/WallRayCastCenter12, 
 	$WallRayCasts/WallRayCastL13, 
 	$WallRayCasts/WallRayCastR13, 
-	$WallRayCasts/WallRayCastCenter13, 
-	$WallRayCasts/WallRayCastL14, 
-	$WallRayCasts/WallRayCastR14, 
-	$WallRayCasts/WallRayCastCenter14, 
+	$WallRayCasts/WallRayCastL13,  
 	$WallRayCasts/WallRayCastCenter15
 ]
 var wall_ray_collision: bool = false
@@ -82,7 +79,7 @@ var default_distance: float = 10.0
 var speed = 5.0
 var run_speed = 2 # Multiplier za run
 var was_in_air: bool = false
-
+var recent_reset = Vector3.ZERO
 #==============================================================================#
 func _ready() -> void:
 	camera_distance.add_excluded_object(self)
@@ -267,10 +264,15 @@ func camera_position():
 func reset():
 	if Input.is_action_just_pressed("one"):
 		$".".global_position = $"../Teleports/TeleportPoint".global_position
+		recent_reset = global_position
 	if Input.is_action_just_pressed("two"):
 		$".".global_position = $"../Teleports/TeleportPoint3".global_position
+		recent_reset = global_position
 	if Input.is_action_just_pressed("three"):
 		$".".global_position = $"../Teleports/TeleportPoint2".global_position
+		recent_reset = global_position
+	if Input.is_action_just_pressed("Reset"):
+		$".".global_position = recent_reset
 
 #==============================================================================#
 func animation_reset(delta):

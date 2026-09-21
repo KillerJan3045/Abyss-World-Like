@@ -107,6 +107,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09051, 5.974472, -161.7391
 use_collision = true
 size = Vector3(5.290039, 2.4355469, 6.5057373)
 
+[node name="Platform9" type="CSGBox3D" parent="Terrain" unique_id=1255659677]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09051, 5.974472, -183.52081)
+use_collision = true
+size = Vector3(5.290039, 2.4355469, 6.5057373)
+
 [node name="Floor" type="Node3D" parent="." unique_id=2131827435]
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Floor" unique_id=1992783751]
@@ -298,7 +303,7 @@ material = SubResource("StandardMaterial3D_gv3r5")
 [node name="Teleports" type="Node3D" parent="." unique_id=1623335098]
 
 [node name="TeleportPoint" parent="Teleports" unique_id=1592107281 instance=ExtResource("2_kpu7f")]
-transform = Transform3D(-0.2136694, 0, -0.976906, 0, 1, 0, 0.976906, 0, -0.2136694, 8.06727, 5.1172447, -50.89395)
+transform = Transform3D(-0.2136694, 0, -0.976906, 0, 1, 0, 0.976906, 0, -0.2136694, -8.033133, 8.973652, -160.20079)
 
 [node name="TeleportPoint2" parent="Teleports" unique_id=1482326866 instance=ExtResource("2_kpu7f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3850975, 41.55823, 64.85392)
@@ -325,7 +330,13 @@ transform = Transform3D(1, 0, 0, 0, 0.60542583, -0.7959017, 0, 0.7959017, 0.6054
 mesh = SubResource("BoxMesh_glf1u")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1926895231]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.985838, 2.1129775, -5.2021666)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.253508, 13.500301, -176.7954)
 use_collision = true
-size = Vector3(1, 7.267578, 6.995117)
+size = Vector3(1, 15.382935, 19.45166)
+material = SubResource("StandardMaterial3D_daxpn")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1154631509]
+transform = Transform3D(0.024810001, 0, 0.99969214, 0, 1, 0, -0.99969214, 0, 0.024810001, -6.0857425, 13.500301, -171.31798)
+use_collision = true
+size = Vector3(1, 15.382935, 8.496826)
 material = SubResource("StandardMaterial3D_daxpn")

@@ -273,12 +273,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.061, 3.5)
 [node name="WallRayCasts" type="Node3D" parent="." unique_id=148738461]
 
 [node name="WallRayCastL" type="RayCast3D" parent="WallRayCasts" unique_id=503156111]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, 0.133, -0.348)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, 0.133, -0.348)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastR" type="RayCast3D" parent="WallRayCasts" unique_id=1757597679]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, 0.133, -0.348)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, 0.133, -0.30354857)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
@@ -288,12 +288,12 @@ target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastL2" type="RayCast3D" parent="WallRayCasts" unique_id=1977798552]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, 0.5995884, -0.348)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, 0.6, -0.348)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastR2" type="RayCast3D" parent="WallRayCasts" unique_id=1592255369]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, 0.5995884, -0.348)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, 0.5995884, -0.30354857)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
@@ -303,12 +303,12 @@ target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastL3" type="RayCast3D" parent="WallRayCasts" unique_id=1309885886]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, -0.48270738, -0.348)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, -0.483, -0.348)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastR3" type="RayCast3D" parent="WallRayCasts" unique_id=1021273618]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, -0.48270738, -0.348)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, -0.48270738, -0.30354857)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
@@ -318,12 +318,12 @@ target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastL4" type="RayCast3D" parent="WallRayCasts" unique_id=407580325]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, -0.18851984, -0.348)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, -0.189, -0.348)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastR4" type="RayCast3D" parent="WallRayCasts" unique_id=1981367966]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, -0.18851984, -0.348)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, -0.18851984, -0.30354857)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
@@ -333,12 +333,12 @@ target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastL5" type="RayCast3D" parent="WallRayCasts" unique_id=593223660]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, 0.3505519, -0.348)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, 0.351, -0.348)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastR5" type="RayCast3D" parent="WallRayCasts" unique_id=2062692777]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, 0.3505519, -0.348)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, 0.3505519, -0.30354857)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
@@ -348,12 +348,12 @@ target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastL6" type="RayCast3D" parent="WallRayCasts" unique_id=1611284604]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, 0.3505519, -0.348)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, 0.351, -0.348)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastR6" type="RayCast3D" parent="WallRayCasts" unique_id=1637165302]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, 0.3505519, -0.348)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, 0.3505519, -0.30354857)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
@@ -363,12 +363,12 @@ target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastL7" type="RayCast3D" parent="WallRayCasts" unique_id=1778816557]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, 0.8237349, -0.24451713)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, 0.824, -0.245)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastR7" type="RayCast3D" parent="WallRayCasts" unique_id=1669439325]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, 0.8237349, -0.24451713)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, 0.8237349, -0.20006572)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
@@ -378,12 +378,12 @@ target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastL8" type="RayCast3D" parent="WallRayCasts" unique_id=1080406726]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, 0.70945776, -0.24451713)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, 0.709, -0.245)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastR8" type="RayCast3D" parent="WallRayCasts" unique_id=1624288301]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, 0.70945776, -0.24451713)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, 0.70945776, -0.20006572)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
@@ -393,12 +393,12 @@ target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastL9" type="RayCast3D" parent="WallRayCasts" unique_id=218911284]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, 0.48007, -0.24451713)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, 0.48, -0.245)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastR9" type="RayCast3D" parent="WallRayCasts" unique_id=578037646]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, 0.48007, -0.24451713)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, 0.48007, -0.20006572)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
@@ -408,12 +408,12 @@ target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastL10" type="RayCast3D" parent="WallRayCasts" unique_id=1149966533]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, 0.2308768, -0.24451713)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, 0.231, -0.245)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastR10" type="RayCast3D" parent="WallRayCasts" unique_id=1216207578]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, 0.2308768, -0.24451713)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, 0.2308768, -0.20006572)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
@@ -423,12 +423,12 @@ target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastL11" type="RayCast3D" parent="WallRayCasts" unique_id=251483238]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, -0.05073297, -0.24451713)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, -0.051, -0.245)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastR11" type="RayCast3D" parent="WallRayCasts" unique_id=1829170169]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, -0.05073297, -0.24451713)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, -0.05073297, -0.20006572)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
@@ -438,12 +438,12 @@ target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastL12" type="RayCast3D" parent="WallRayCasts" unique_id=644373036]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, -0.37852103, -0.24451713)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, -0.379, -0.245)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
 [node name="WallRayCastR12" type="RayCast3D" parent="WallRayCasts" unique_id=711496409]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, -0.37852103, -0.24451713)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, -0.37852103, -0.20006572)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
@@ -452,33 +452,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.37829792, -0.3800884)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
-[node name="WallRayCastL13" type="RayCast3D" parent="WallRayCasts" unique_id=1974464573]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, -0.7136632, -0.24451713)
-target_position = Vector3(0, 0, -0.25)
-hit_from_inside = true
-
 [node name="WallRayCastR13" type="RayCast3D" parent="WallRayCasts" unique_id=1125220497]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, -0.7136632, -0.24451713)
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.25740048, -0.7136632, -0.20006572)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
-[node name="WallRayCastCenter13" type="RayCast3D" parent="WallRayCasts" unique_id=1468613095]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7134402, -0.3800884)
-target_position = Vector3(0, 0, -0.25)
-hit_from_inside = true
-
-[node name="WallRayCastL14" type="RayCast3D" parent="WallRayCasts" unique_id=1408651184]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.22, -0.7136632, -0.24451713)
-target_position = Vector3(0, 0, -0.25)
-hit_from_inside = true
-
-[node name="WallRayCastR14" type="RayCast3D" parent="WallRayCasts" unique_id=1606841785]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 0.22, -0.7136632, -0.24451713)
-target_position = Vector3(0, 0, -0.25)
-hit_from_inside = true
-
-[node name="WallRayCastCenter14" type="RayCast3D" parent="WallRayCasts" unique_id=154588512]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7134402, -0.3800884)
+[node name="WallRayCastL13" type="RayCast3D" parent="WallRayCasts" unique_id=1408651184]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -0.25, -0.714, -0.245)
 target_position = Vector3(0, 0, -0.25)
 hit_from_inside = true
 
