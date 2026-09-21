@@ -2,12 +2,51 @@ extends CharacterBody3D
 
 @onready var jump_timer: Timer = $StartUpTimer
 @onready var slope_ray_cast: RayCast3D = $SlopeRayCast
-var wall_ray_collision: bool = false
 @onready var wall_ray_casts: Array[RayCast3D] = [
 	$WallRayCasts/WallRayCastL,
 	$WallRayCasts/WallRayCastR,
-	$WallRayCasts/WallRayCastCenter
+	$WallRayCasts/WallRayCastCenter,
+	$WallRayCasts/WallRayCastL2, 
+	$WallRayCasts/WallRayCastR2, 
+	$WallRayCasts/WallRayCastCenter2,
+	$WallRayCasts/WallRayCastL3,
+	$WallRayCasts/WallRayCastR3,
+	$WallRayCasts/WallRayCastCenter3,
+	$WallRayCasts/WallRayCastL4, 
+	$WallRayCasts/WallRayCastR4, 
+	$WallRayCasts/WallRayCastCenter4, 
+	$WallRayCasts/WallRayCastL5, 
+	$WallRayCasts/WallRayCastR5, 
+	$WallRayCasts/WallRayCastCenter5, 
+	$WallRayCasts/WallRayCastL6, 
+	$WallRayCasts/WallRayCastR6,
+	$WallRayCasts/WallRayCastL7, 
+	$WallRayCasts/WallRayCastR7, 
+	$WallRayCasts/WallRayCastCenter7,
+	$WallRayCasts/WallRayCastL8, 
+	$WallRayCasts/WallRayCastR8, 
+	$WallRayCasts/WallRayCastCenter8, 
+	$WallRayCasts/WallRayCastL9,
+	$WallRayCasts/WallRayCastR9,
+	$WallRayCasts/WallRayCastCenter9,
+	$WallRayCasts/WallRayCastL10, 
+	$WallRayCasts/WallRayCastR10, 
+	$WallRayCasts/WallRayCastCenter10, 
+	$WallRayCasts/WallRayCastL11, 
+	$WallRayCasts/WallRayCastR11, 
+	$WallRayCasts/WallRayCastCenter11, 
+	$WallRayCasts/WallRayCastL12, 
+	$WallRayCasts/WallRayCastR12, 
+	$WallRayCasts/WallRayCastCenter12, 
+	$WallRayCasts/WallRayCastL13, 
+	$WallRayCasts/WallRayCastR13, 
+	$WallRayCasts/WallRayCastCenter13, 
+	$WallRayCasts/WallRayCastL14, 
+	$WallRayCasts/WallRayCastR14, 
+	$WallRayCasts/WallRayCastCenter14, 
+	$WallRayCasts/WallRayCastCenter15
 ]
+var wall_ray_collision: bool = false
 #-----------------------------Camera Stuff--------------------------------------
 var cam_mode: int = 0
 @onready var pivot: Node3D = $CamOrigin
@@ -19,26 +58,27 @@ var max_zoom: float = 6.0
 @export var zoom_speed: float = 0.5
 var camera_lock: bool = false
 var mouse_unlocked:bool = false
-#-------------------------------------------------------------------------------
+var mouse_mode: int = 0
+#-------------------------------Gravty-----------------------------------------#
 var gravity: float = 30.0
 var fall_multiplier: float = 1.3
 
-#-------------------------------Jumping-----------------------------------------
+#-------------------------------Jumping----------------------------------------#
 var can_walk: bool = true
 var is_jumping: bool = false
 var jump_start_up: bool = false
 
-#------                       Jump Force
+#------                       Jump Force                                 ------#
 var jump_force = 13.0
 var default_jump = 13.0
 @export var max_jump_force: float = 20
 
-#------                      Jump Distance
+#------                      Jump Distance                               ------#
 @export var jump_distance: float = 10.0
 var default_distance: float = 10.0
 @export var max_jump_distance: float = 20.0
 
-#-------------------------------Movement----------------------------------------
+#-------------------------------Movement---------------------------------------#
 var speed = 5.0
 var run_speed = 2 # Multiplier za run
 var was_in_air: bool = false
@@ -56,6 +96,7 @@ func _physics_process(delta: float) -> void:
 		if normal.y < 0.99: 
 			var slide_dir = Vector3.DOWN.slide(normal).normalized()
 			velocity += slide_dir * gravity * delta
+	
 	if (is_on_floor() or slope_ray_cast.is_colliding()) and !camera_lock:
 		animation_reset(delta)
 	
@@ -67,13 +108,17 @@ func _physics_process(delta: float) -> void:
 	quit()
 	my_gravity(delta)
 	
-	print("height ", jump_force)
-	print("distance ", jump_distance)
+	#--------------------------------#
+	#print("height ", jump_force)
+	#print("distance ", jump_distance)
+	#--------------------------------#
 	#print("velocity.x ", velocity.x)
 	#print("velocity.z ", velocity.z)
 	#print("velocity.y ", velocity.y)
+	#--------------------------------#
+	
 	move_and_slide()
-	was_in_air = not is_on_floor()
+	
 
 #==============================================================================#
 #- - - - - - - - - - - - - - - Funcy Town - - - - - - - - - - - - - - - - - - -#
@@ -100,6 +145,7 @@ func handle_jump(_delta):
 			if jump_force < max_jump_force:
 				$AnimationPlayer.play("Jump_Charge")
 				$AnimationPlayer.queue("Max_Charge")
+
 	#==============================Cancel Jump=================================#
 	if Input.is_action_pressed("cancel jump"):
 		jump_force = default_jump
@@ -140,10 +186,12 @@ func handle_movement():
 	if direction and can_walk and is_on_floor():
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
+	
 	else:
 		if is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, speed)
 			velocity.z = move_toward(velocity.z, 0, speed)
+			
 		else:
 			velocity.x = move_toward(velocity.x, 0, 0.05)
 			velocity.z = move_toward(velocity.z, 0, 0.05)
@@ -157,7 +205,7 @@ func quit():
 func _input(event: InputEvent) -> void: 
 	if event is InputEventMouseMotion and not mouse_unlocked:
 		var y_angle: float = deg_to_rad(-event.relative.x * sens)
-		# Rotate Player root node"hit_back_faces"
+	
 		rotate_y(y_angle)
 		# COUNTER-ROTATE $Body while in the air so it stays frozen in world space
 		if not is_on_floor() or camera_lock:
@@ -182,6 +230,7 @@ func my_gravity(delta):
 
 #===========================Camera and Mouse===================================#
 func camera_position():
+	
 	if Input.is_action_just_pressed("camera mode"):
 		cam_mode += 1
 	if cam_mode == 0:
@@ -201,11 +250,18 @@ func camera_position():
 		camera_lock = false
 
 	if Input.is_action_just_pressed("mouse unlock"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		mouse_unlocked = true
-	if Input.is_action_just_released("mouse unlock"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		mouse_unlocked = false
+		if mouse_mode < 1:
+			mouse_mode += 1
+		else: 
+			mouse_mode = 0
+	
+		if mouse_mode == 1:
+			mouse_unlocked = true
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			mouse_unlocked = false
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 #==============================================================================#
 func reset():
@@ -223,4 +279,7 @@ func animation_reset(delta):
 
 #==============================================================================#
 func state_machine():
-	pass
+	if (slope_ray_cast.is_colliding() or is_on_floor()) and not is_jumping:
+		$AnimationPlayer.play("Idle")
+
+#==============================================================================#
