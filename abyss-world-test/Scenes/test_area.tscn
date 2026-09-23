@@ -103,14 +103,14 @@ use_collision = true
 size = Vector3(5.290039, 2.4355469, 6.5057373)
 
 [node name="Platform8" type="CSGBox3D" parent="Terrain" unique_id=1852049152]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09051, 5.974472, -161.73915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09051, 6.381668, -161.38512)
 use_collision = true
-size = Vector3(5.290039, 2.4355469, 6.5057373)
+size = Vector3(8.219727, 1.6331177, 7.213806)
 
 [node name="Platform9" type="CSGBox3D" parent="Terrain" unique_id=1255659677]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09051, 5.974472, -183.52081)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8041945, 6.1439056, -186.97055)
 use_collision = true
-size = Vector3(5.290039, 2.4355469, 6.5057373)
+size = Vector3(9.098267, 2.0966797, 13.405212)
 
 [node name="Floor" type="Node3D" parent="." unique_id=2131827435]
 
@@ -331,6 +331,12 @@ mesh = SubResource("BoxMesh_glf1u")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1926895231]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.253508, 13.500301, -176.7954)
+use_collision = true
+size = Vector3(1, 15.382935, 19.45166)
+material = SubResource("StandardMaterial3D_daxpn")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1341785548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.001402, 3.6831102, -157.78043)
 use_collision = true
 size = Vector3(1, 15.382935, 19.45166)
 material = SubResource("StandardMaterial3D_daxpn")
