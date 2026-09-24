@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var slope_ray_cast: RayCast3D = $SlopeRayCast
 @onready var wall_ray_casts: Array[RayCast3D] = []
 var wall_ray_collision: bool = false
+
 #-----------------------------Camera Stuff--------------------------------------
 var cam_mode: int = 0
 @onready var pivot: Node3D = $CamOrigin
@@ -14,9 +15,10 @@ var min_zoom: float = 2.5
 var max_zoom: float = 6.0
 @export var zoom_speed: float = 0.25
 var camera_lock: bool = false
-var mouse_unlocked:bool = false
+var mouse_unlocked: bool = false
 var mouse_mode: int = 0
-#-------------------------------Gravty-----------------------------------------#
+
+#-------------------------------Gravity----------------------------------------#
 var gravity: float = 30.0
 var fall_multiplier: float = 1.3
 
@@ -28,7 +30,7 @@ var jump_start_up: bool = false
 #------                       Jump Force                                 ------#
 var jump_force = 13.0
 var default_jump = 13.0
-@export var max_jump_force: float = 20
+@export var max_jump_force: float = 20.0
 
 #------                      Jump Distance                               ------#
 @export var jump_distance: float = 10.0
@@ -37,50 +39,37 @@ var default_distance: float = 10.0
 
 #-------------------------------Movement---------------------------------------#
 var speed = 6.0
-var run_speed = 2 # Multiplier za run
+var run_speed = 2 # Multiplier for run
 var was_in_air: bool = false
 var recent_reset = Vector3(0, 2, 0)
+
 #==============================================================================#
 func _ready() -> void:
 	camera_distance.add_excluded_object(self)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
+	# Fetch all 7 RayCasts automatically[cite: 2]
 	for child in $WallRayCasts.get_children():
 		if child is RayCast3D:
 			wall_ray_casts.append(child)
+
 #==============================================================================#
 func _physics_process(delta: float) -> void:
-	var in_air: bool = not is_on_floor()
-	for ray in wall_ray_casts:
-		ray.enabled = in_air
-	
-	
 	slope_slide(delta)
 	state_machine()
 	reset()
 	camera_position()
 	handle_movement()
 	handle_jump(delta)
-	
 	my_gravity(delta)
 
-	#--------------------------------#
-	#print("height ", jump_force)
-	#print("distance ", jump_distance)
-	#--------------------------------#
-	#print("velocity.x ", velocity.x)
-	#print("velocity.z ", velocity.z)
-	#print("velocity.y ", velocity.y)
-	#--------------------------------#
-
 	move_and_slide()
-	
+
 #==============================================================================#
 #- - - - - - - - - - - - - - - Funcy Town - - - - - - - - - - - - - - - - - - -#
 #==============================================================================#
-func handle_jump(_delta):
+func handle_jump(_delta: float) -> void:
 	var forward_dir: Vector3 = -global_transform.basis.z
-
 	forward_dir.y = 0.0
 	forward_dir = forward_dir.normalized()
 
@@ -96,7 +85,7 @@ func handle_jump(_delta):
 			jump_force = min(jump_force + 0.1667, max_jump_force)
 			jump_distance = min(jump_distance + 0.25, max_jump_distance)
 			if velocity.y < 0:
-				jump_distance += -velocity.y/8
+				jump_distance += -velocity.y / 8.0
 			if jump_force < max_jump_force:
 				$AnimationPlayer.play("Jump_Charge")
 				$AnimationPlayer.queue("Max_Charge")
@@ -117,6 +106,7 @@ func handle_jump(_delta):
 			$AnimationPlayer.play("tap_jump")
 		else:
 			$AnimationPlayer.play("mid_jump")
+			
 		velocity.y = jump_force
 		velocity.x = forward_dir.x * jump_distance
 		velocity.z = forward_dir.z * jump_distance
@@ -130,65 +120,71 @@ func handle_jump(_delta):
 
 	#==============================Wall Jump===================================#
 	if not is_on_floor():
+		var total_normal: Vector3 = Vector3.ZERO
+		var hit_count: int = 0
+
+		# 1. Sum collision normals across all active rays[cite: 2]
 		for ray in wall_ray_casts:
-			ray.enabled = true
-			
 			if ray.is_colliding():
-				var wall_normal: Vector3 = ray.get_collision_normal()
+				total_normal += ray.get_collision_normal()
+				hit_count += 1
 
-				# 1. Capture the EXACT incoming horizontal speed (never let it shrink)
-				var incoming_h_vel: Vector3 = Vector3(velocity.x, 0.0, velocity.z)
-				var entry_speed: float = max(incoming_h_vel.length(), speed * 1.2)
+		# 2. Process bounce if at least one ray made contact
+		if hit_count > 0:
+			# Average the collision normals to prevent single side-ray direction glitches[cite: 2]
+			var wall_normal: Vector3 = (total_normal / float(hit_count)).normalized()
 
-				# 2. Calculate pure bounce direction
-				var bounce_dir: Vector3 = incoming_h_vel.bounce(wall_normal)
-				bounce_dir.y = 0.0
+			# 3. Preserve exact pre-collision horizontal momentum
+			var incoming_h_vel: Vector3 = Vector3(velocity.x, 0.0, velocity.z)
+			var entry_speed: float = max(incoming_h_vel.length(), speed * 1.2)
 
-				# 3. Handle shallow angles: Ensure minimum push-off angle from wall normal
-				# If dot product is too low, force a minimum 30-degree deflection off the wall
-				var min_deflection: float = 0.35 # Prevents sliding parallel/losing speed
-				if bounce_dir.normalized().dot(wall_normal) < min_deflection:
-					# Push the bounce direction away from the wall normal
-					bounce_dir = (bounce_dir.normalized() + wall_normal * min_deflection).normalized()
-				else:
-					bounce_dir = bounce_dir.normalized()
+			# 4. Calculate pure horizontal bounce vector
+			var bounce_dir: Vector3 = incoming_h_vel.bounce(wall_normal)
+			bounce_dir.y = 0.0
 
-				# 4. Apply the FULL original entry speed to the new direction
-				velocity.x = bounce_dir.x * entry_speed
-				velocity.z = bounce_dir.z * entry_speed
+			# 5. Prevent parallel sliding on shallow angles (enforce min 35% deflection)
+			var min_deflection: float = 0.35
+			if bounce_dir.normalized().dot(wall_normal) < min_deflection:
+				bounce_dir = (bounce_dir.normalized() + wall_normal * min_deflection).normalized()
+			else:
+				bounce_dir = bounce_dir.normalized()
 
-				# 5. Nudge character off wall to prevent sticking on next frame
-				global_position += wall_normal * 0.15
+			# 6. Apply full entry speed to new bounce direction
+			velocity.x = bounce_dir.x * entry_speed
+			velocity.z = bounce_dir.z * entry_speed
 
-				# 6. Turn body visual
-				if bounce_dir.length_squared() > 0.001:
-					$Body.global_transform.basis = Basis.looking_at(bounce_dir, Vector3.UP)
-					$WallRayCasts.global_transform.basis = Basis.looking_at(bounce_dir, Vector3.UP)
-				
-				break
+			# 7. Push character off wall geometry to prevent sticking
+			global_position += wall_normal * 0.15
+
+			# 8. Align mesh visuals smoothly toward bounce trajectory
+			if bounce_dir.length_squared() > 0.001:
+				$Body.global_transform.basis = Basis.looking_at(bounce_dir, Vector3.UP)
+				$WallRayCasts.global_transform.basis = Basis.looking_at(bounce_dir, Vector3.UP)
 
 #==============================================================================#
-func handle_movement():
+func handle_movement() -> void:
 	var input_dir := Input.get_vector("left", "right", "up", "down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction and can_walk and is_on_floor():
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
-
 	else:
 		if is_on_floor():
 			velocity.x = 0
 			velocity.z = 0
-
 		else:
-			velocity.x = move_toward(velocity.x, 0, 0.05)
-			velocity.z = move_toward(velocity.z, 0, 0.05)
+			# Scale horizontal vector proportionally so flight direction doesn't skew
+			var horiz_vel := Vector3(velocity.x, 0.0, velocity.z)
+			horiz_vel = horiz_vel.move_toward(Vector3.ZERO, 0.05)
+			velocity.x = horiz_vel.x
+			velocity.z = horiz_vel.z
 
 #===============================Quit===========================================#
-func quit():
+func quit() -> void:
 	if Input.is_action_pressed("quit"):
 		get_tree().quit()
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("quit"):
 		get_tree().quit()
@@ -199,7 +195,6 @@ func _input(event: InputEvent) -> void:
 		var y_angle: float = deg_to_rad(-event.relative.x * sens)
 
 		rotate_y(y_angle)
-		# COUNTER-ROTATE $Body while in the air so it stays frozen in world space
 		if not is_on_floor() or camera_lock:
 			$Body.rotate_y(-y_angle)
 			$WallRayCasts.rotate_y(-y_angle)
@@ -213,7 +208,7 @@ func _input(event: InputEvent) -> void:
 			camera_distance.spring_length = clamp(camera_distance.spring_length + zoom_speed, min_zoom, max_zoom)
 
 #==============================================================================#
-func my_gravity(delta):
+func my_gravity(delta: float) -> void:
 	if not is_on_floor():
 		if velocity.y > 0.0:
 			velocity.y -= gravity * delta
@@ -221,8 +216,7 @@ func my_gravity(delta):
 			velocity.y -= gravity * fall_multiplier * delta
 
 #===========================Camera and Mouse===================================#
-func camera_position():
-
+func camera_position() -> void:
 	if Input.is_action_just_pressed("camera mode"):
 		cam_mode += 1
 	if cam_mode == 0:
@@ -256,7 +250,7 @@ func camera_position():
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 #==============================================================================#
-func reset():
+func reset() -> void:
 	if Input.is_action_just_pressed("one"):
 		$".".global_position = $"../Teleports/TeleportPoint".global_position
 		recent_reset = global_position
@@ -271,30 +265,28 @@ func reset():
 		velocity = Vector3.ZERO
 
 #==============================================================================#
-func animation_reset(delta):
+func animation_reset(delta: float) -> void:
 	$Body.rotation = $Body.rotation.lerp(Vector3.ZERO, 15.0 * delta)
 	$WallRayCasts.rotation = $WallRayCasts.rotation.lerp(Vector3.ZERO, 15.0 * delta)
 
 #==============================================================================#
-func state_machine():
+func state_machine() -> void:
 	if (slope_ray_cast.is_colliding() or is_on_floor()) and not is_jumping:
 		$AnimationPlayer.play("Idle")
 
 #==============================================================================#
-func time_slow():
+func time_slow() -> void:
 	Engine.time_scale = 0.5
-	pass
 
 #==============================================================================#
-func resolution():
-	ProjectSettings.set_setting("display/window/size/width",1600)
-	ProjectSettings.set_setting("display/window/size/height",800)   
+func resolution() -> void:
+	ProjectSettings.set_setting("display/window/size/width", 1600)
+	ProjectSettings.set_setting("display/window/size/height", 800)   
 
- #==============================================================================#
-func slope_slide(delta):
+#==============================================================================#
+func slope_slide(delta: float) -> void:
 	if slope_ray_cast.is_colliding():
 		var normal = slope_ray_cast.get_collision_normal()
-
 		if normal.y < 0.99: 
 			var slide_dir = Vector3.DOWN.slide(normal).normalized()
 			velocity += slide_dir * gravity * delta

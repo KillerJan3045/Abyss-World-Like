@@ -101,6 +101,8 @@ Reset={
 3d_physics/layer_1="Terrain"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Player Rays"
+3d_physics/size/mode=0
+3d_physics/size/viewport_height=1080
 
 [physics]
 
