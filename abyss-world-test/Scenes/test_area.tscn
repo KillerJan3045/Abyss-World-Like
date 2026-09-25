@@ -336,9 +336,9 @@ size = Vector3(1, 15.382935, 19.45166)
 material = SubResource("StandardMaterial3D_daxpn")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1341785548]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.001402, 3.6831102, -157.78043)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.755586, 3.6831102, -139.17862)
 use_collision = true
-size = Vector3(1, 15.382935, 19.45166)
+size = Vector3(1, 15.382935, 54.209106)
 material = SubResource("StandardMaterial3D_daxpn")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1154631509]

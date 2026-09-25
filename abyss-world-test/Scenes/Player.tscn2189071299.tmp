@@ -1,0 +1,487 @@
+[gd_scene format=3 uid="uid://dhh624wnyiiif"]
+
+[ext_resource type="Script" uid="uid://b031q02ukynpn" path="res://Scripts/character_body_3d.gd" id="1_hr86y"]
+[ext_resource type="Texture2D" uid="uid://qghkjy5el0vb" path="res://icon.svg" id="2_fn5od"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33eq7"]
+albedo_color = Color(0.592139, 0, 0.03035077, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_glf1u"]
+material = SubResource("StandardMaterial3D_33eq7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hr86y"]
+albedo_color = Color(0.55333596, 0, 0.12572241, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_glf1u"]
+material = SubResource("StandardMaterial3D_hr86y")
+size = Vector3(0.38964844, 0.85546875, 0.46655273)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fn5od"]
+albedo_texture = ExtResource("2_fn5od")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_daxpn"]
+albedo_color = Color(0.36863428, 0.5563437, 0.6390152, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_glf1u"]
+material = SubResource("StandardMaterial3D_daxpn")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_glf1u"]
+radius = 0.50439453
+
+[sub_resource type="Animation" id="Animation_5ixxa"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.96154976, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.031056762, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kyqiw"]
+resource_name = "Jump_Charge"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.5023129, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.49076968, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dewec"]
+resource_name = "Max_Charge"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.49076968, 0), Vector3(0, -0.44003254, 0), Vector3(0, -0.49076968, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0.5023129, 1), Vector3(1, 0.52, 1), Vector3(1, 0.5023129, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gntrk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nn08x"]
+resource_name = "jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.49076968, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.099999994),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 0.5023129, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bhhdu"]
+resource_name = "mid_jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 0.805, 1), Vector3(1, 1.03, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.21288031, 0), Vector3(0, 0.0058416724, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_52ee3"]
+resource_name = "tap_jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 0.9, 1), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.1201787, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dewec"]
+_data = {
+&"Idle": SubResource("Animation_5ixxa"),
+&"Jump_Charge": SubResource("Animation_kyqiw"),
+&"Max_Charge": SubResource("Animation_dewec"),
+&"RESET": SubResource("Animation_gntrk"),
+&"max_jump": SubResource("Animation_nn08x"),
+&"mid_jump": SubResource("Animation_bhhdu"),
+&"tap_jump": SubResource("Animation_52ee3")
+}
+
+[node name="Player" type="CharacterBody3D" unique_id=1833712706]
+collision_layer = 2
+floor_stop_on_slope = false
+floor_max_angle = 0.5235988
+floor_snap_length = 1.0
+script = ExtResource("1_hr86y")
+
+[node name="Body" type="Node3D" parent="." unique_id=551814791]
+metadata/_edit_lock_ = true
+
+[node name="MainBody" type="MeshInstance3D" parent="Body" unique_id=847254332]
+mesh = SubResource("CapsuleMesh_glf1u")
+metadata/_edit_lock_ = true
+
+[node name="BackSide" type="MeshInstance3D" parent="Body" unique_id=1394582268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1603924, 0.32016593)
+mesh = SubResource("BoxMesh_glf1u")
+metadata/_edit_lock_ = true
+
+[node name="Visor" type="MeshInstance3D" parent="Body" unique_id=1700993716]
+transform = Transform3D(0.6330626, 0, 0, 0, 0.42301592, 0, 0, 0, 0.3472244, -0.0014320612, 0.66029537, -0.36005494)
+material_override = SubResource("StandardMaterial3D_fn5od")
+mesh = SubResource("SphereMesh_glf1u")
+metadata/_edit_lock_ = true
+
+[node name="CamOrigin" type="Node3D" parent="." unique_id=771523477]
+
+[node name="CameraDistance" type="SpringArm3D" parent="CamOrigin" unique_id=169814014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9498377, 0)
+spring_length = 2.5
+margin = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="CamOrigin/CameraDistance" unique_id=804738862]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.061, 3.5)
+
+[node name="WallRayCasts" type="Node3D" parent="." unique_id=148738461]
+
+[node name="WallRayCastL" type="RayCast3D" parent="WallRayCasts" unique_id=503156111]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, 0.133, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR" type="RayCast3D" parent="WallRayCasts" unique_id=1757597679]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, 0.133, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastCenter" type="RayCast3D" parent="WallRayCasts" unique_id=1531665225]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13322312, -0.5)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastL2" type="RayCast3D" parent="WallRayCasts" unique_id=1977798552]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, 0.6, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR2" type="RayCast3D" parent="WallRayCasts" unique_id=1592255369]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, 0.5995884, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastCenter2" type="RayCast3D" parent="WallRayCasts" unique_id=1060282058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5998115, -0.5)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastL3" type="RayCast3D" parent="WallRayCasts" unique_id=1309885886]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, -0.483, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR3" type="RayCast3D" parent="WallRayCasts" unique_id=1021273618]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, -0.48270738, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastCenter3" type="RayCast3D" parent="WallRayCasts" unique_id=2080989664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.48248428, -0.5)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastL4" type="RayCast3D" parent="WallRayCasts" unique_id=407580325]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, -0.189, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR4" type="RayCast3D" parent="WallRayCasts" unique_id=1981367966]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, -0.18851984, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastCenter4" type="RayCast3D" parent="WallRayCasts" unique_id=705736373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.18829674, -0.5)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastL5" type="RayCast3D" parent="WallRayCasts" unique_id=593223660]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, 0.351, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR5" type="RayCast3D" parent="WallRayCasts" unique_id=2062692777]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, 0.3505519, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastCenter5" type="RayCast3D" parent="WallRayCasts" unique_id=1254842669]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.350775, -0.5)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastL6" type="RayCast3D" parent="WallRayCasts" unique_id=1611284604]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, 0.351, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR6" type="RayCast3D" parent="WallRayCasts" unique_id=1637165302]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, 0.3505519, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastCenter6" type="RayCast3D" parent="WallRayCasts" unique_id=1965187161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.350775, -0.5)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastL7" type="RayCast3D" parent="WallRayCasts" unique_id=1778816557]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, 0.824, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR7" type="RayCast3D" parent="WallRayCasts" unique_id=1669439325]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, 0.8237349, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastHead2" type="RayCast3D" parent="WallRayCasts" unique_id=1071359144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823958, -0.3655889)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastL8" type="RayCast3D" parent="WallRayCasts" unique_id=1080406726]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, 0.709, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR8" type="RayCast3D" parent="WallRayCasts" unique_id=1624288301]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, 0.70945776, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastCenter8" type="RayCast3D" parent="WallRayCasts" unique_id=1796211477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70968086, -0.5)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastL9" type="RayCast3D" parent="WallRayCasts" unique_id=218911284]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, 0.48, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR9" type="RayCast3D" parent="WallRayCasts" unique_id=578037646]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, 0.48007, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastCenter9" type="RayCast3D" parent="WallRayCasts" unique_id=1062181377]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4802931, -0.5)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastL10" type="RayCast3D" parent="WallRayCasts" unique_id=1149966533]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, 0.231, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR10" type="RayCast3D" parent="WallRayCasts" unique_id=1216207578]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, 0.2308768, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastCenter10" type="RayCast3D" parent="WallRayCasts" unique_id=100943782]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2310999, -0.5)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastL11" type="RayCast3D" parent="WallRayCasts" unique_id=251483238]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, -0.051, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR11" type="RayCast3D" parent="WallRayCasts" unique_id=1829170169]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, -0.05073297, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastCenter11" type="RayCast3D" parent="WallRayCasts" unique_id=1843512638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05050987, -0.5)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastL12" type="RayCast3D" parent="WallRayCasts" unique_id=644373036]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, -0.379, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR12" type="RayCast3D" parent="WallRayCasts" unique_id=711496409]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, -0.37852103, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastCenter12" type="RayCast3D" parent="WallRayCasts" unique_id=173161084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.37829792, -0.5)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastL13" type="RayCast3D" parent="WallRayCasts" unique_id=1408651184]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.34074348, -0.714, -0.2741186)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastHead" type="RayCast3D" parent="WallRayCasts" unique_id=48613821]
+transform = Transform3D(1, 0, 0, 0, 0.8520451, -0.5234683, 0, 0.5234683, 0.8520451, 0, 0.91776717, -0.24488828)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="WallRayCastR13" type="RayCast3D" parent="WallRayCasts" unique_id=1125220497]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.37, -0.7136632, -0.2)
+target_position = Vector3(0, 0, -0.3)
+hit_from_inside = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=573196159]
+shape = SubResource("CapsuleShape3D_glf1u")
+
+[node name="SlopeRayCast" type="RayCast3D" parent="." unique_id=1158396062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9655103, 0)
+target_position = Vector3(0, -0.3, 0)
+
+[node name="StartUpTimer" type="Timer" parent="." unique_id=2013519004]
+wait_time = 0.1
+one_shot = true
+
+[node name="IdleTimer" type="Timer" parent="." unique_id=682767194]
+wait_time = 0.2
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1856611325]
+libraries/ = SubResource("AnimationLibrary_dewec")
+autoplay = &"Idle"

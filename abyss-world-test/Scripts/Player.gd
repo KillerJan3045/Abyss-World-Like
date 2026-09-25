@@ -8,7 +8,7 @@ var wall_ray_collision: bool = false
 #-----------------------------Camera Stuff--------------------------------------
 var cam_mode: int = 0
 @onready var pivot: Node3D = $CamOrigin
-var sens = 0.2
+var local_sens = Global.sens
 @onready var camera: Camera3D = $CamOrigin/CameraDistance/Camera3D
 @onready var camera_distance: SpringArm3D = $CamOrigin/CameraDistance
 var min_zoom: float = 2.5
@@ -34,8 +34,9 @@ var default_jump = 13.0
 
 #------                      Jump Distance                               ------#
 @export var jump_distance: float = 10.0
-var default_distance: float = 10.0
 @export var max_jump_distance: float = 20.0
+var default_distance: float = 10.0
+
 
 #-------------------------------Movement---------------------------------------#
 var speed = 6.0
@@ -55,6 +56,7 @@ func _ready() -> void:
 
 #==============================================================================#
 func _physics_process(delta: float) -> void:
+	
 	slope_slide(delta)
 	state_machine()
 	reset()
@@ -106,7 +108,7 @@ func handle_jump(_delta: float) -> void:
 			$AnimationPlayer.play("tap_jump")
 		else:
 			$AnimationPlayer.play("mid_jump")
-			
+	
 		velocity.y = jump_force
 		velocity.x = forward_dir.x * jump_distance
 		velocity.z = forward_dir.z * jump_distance
@@ -119,44 +121,38 @@ func handle_jump(_delta: float) -> void:
 		recent_reset = global_position
 
 	#==============================Wall Jump===================================#
-	if not is_on_floor():
+	if not is_on_floor() and not slope_ray_cast.is_colliding():
 		var total_normal: Vector3 = Vector3.ZERO
 		var hit_count: int = 0
 
-		# 1. Sum collision normals across all active rays[cite: 2]
 		for ray in wall_ray_casts:
 			if ray.is_colliding():
 				total_normal += ray.get_collision_normal()
 				hit_count += 1
 
-		# 2. Process bounce if at least one ray made contact
 		if hit_count > 0:
-			# Average the collision normals to prevent single side-ray direction glitches[cite: 2]
 			var wall_normal: Vector3 = (total_normal / float(hit_count)).normalized()
 
-			# 3. Preserve exact pre-collision horizontal momentum
 			var incoming_h_vel: Vector3 = Vector3(velocity.x, 0.0, velocity.z)
 			var entry_speed: float = max(incoming_h_vel.length(), speed * 1.2)
 
-			# 4. Calculate pure horizontal bounce vector
 			var bounce_dir: Vector3 = incoming_h_vel.bounce(wall_normal)
 			bounce_dir.y = 0.0
 
-			# 5. Prevent parallel sliding on shallow angles (enforce min 35% deflection)
 			var min_deflection: float = 0.35
 			if bounce_dir.normalized().dot(wall_normal) < min_deflection:
 				bounce_dir = (bounce_dir.normalized() + wall_normal * min_deflection).normalized()
 			else:
 				bounce_dir = bounce_dir.normalized()
 
-			# 6. Apply full entry speed to new bounce direction
+			#  Apply full entry speed to new bounce direction
 			velocity.x = bounce_dir.x * entry_speed
 			velocity.z = bounce_dir.z * entry_speed
 
-			# 7. Push character off wall geometry to prevent sticking
+			#  Push character off wall geometry to prevent sticking
 			global_position += wall_normal * 0.15
 
-			# 8. Align mesh visuals smoothly toward bounce trajectory
+			#  Align mesh visuals smoothly toward bounce trajectory
 			if bounce_dir.length_squared() > 0.001:
 				$Body.global_transform.basis = Basis.looking_at(bounce_dir, Vector3.UP)
 				$WallRayCasts.global_transform.basis = Basis.looking_at(bounce_dir, Vector3.UP)
@@ -181,24 +177,20 @@ func handle_movement() -> void:
 			velocity.z = horiz_vel.z
 
 #===============================Quit===========================================#
-func quit() -> void:
-	if Input.is_action_pressed("quit"):
-		get_tree().quit()
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("quit"):
-		get_tree().quit()
+		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 #============================CAMERA CONTROLS===================================#
 func _input(event: InputEvent) -> void: 
 	if event is InputEventMouseMotion and not mouse_unlocked:
-		var y_angle: float = deg_to_rad(-event.relative.x * sens)
+		var y_angle: float = deg_to_rad(-event.relative.x * local_sens)
 
 		rotate_y(y_angle)
 		if not is_on_floor() or camera_lock:
 			$Body.rotate_y(-y_angle)
 			$WallRayCasts.rotate_y(-y_angle)
-		pivot.rotate_x(deg_to_rad(-event.relative.y * sens))
+		pivot.rotate_x(deg_to_rad(-event.relative.y * local_sens))
 		pivot.rotation.x = clamp(pivot.rotation.x, deg_to_rad(-60), deg_to_rad(40))
 
 	if event is InputEventMouseButton:
@@ -285,11 +277,11 @@ func resolution() -> void:
 
 #==============================================================================#
 func slope_slide(delta: float) -> void:
+	if (is_on_floor() or slope_ray_cast.is_colliding()) and !camera_lock:
+		animation_reset(delta)
+	
 	if slope_ray_cast.is_colliding():
 		var normal = slope_ray_cast.get_collision_normal()
 		if normal.y < 0.99: 
 			var slide_dir = Vector3.DOWN.slide(normal).normalized()
 			velocity += slide_dir * gravity * delta
-
-	if (is_on_floor() or slope_ray_cast.is_colliding()) and !camera_lock:
-		animation_reset(delta)

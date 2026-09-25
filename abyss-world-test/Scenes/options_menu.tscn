@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://btea8s66ckius"]
+
+[ext_resource type="Script" uid="uid://dxylx6q6hmdvb" path="res://Scenes/options_menu.gd" id="1_plplt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tqe32"]
+content_margin_left = 145.0
+texture_margin_left = 146.0
+modulate_color = Color(0, 0, 0, 1)
+
+[node name="OptionsMenu" type="Control" unique_id=2114240575]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_plplt")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=143887437]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39635417
+anchor_top = 0.2935185
+anchor_right = 0.60364586
+anchor_bottom = 0.6537037
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1293021133]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1175421456]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_tqe32")
+text = "SENSITIVITY"
+
+[node name="SensSlider" type="HSlider" parent="MarginContainer/VBoxContainer" unique_id=494079466]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="ReturnToMenu" type="Button" parent="MarginContainer/VBoxContainer" unique_id=419420248]
+layout_mode = 2
+text = "Return
+
+"
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/SensSlider" to="." method="_on_sens_slider_value_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ReturnToMenu" to="." method="_on_return_to_menu_pressed"]
